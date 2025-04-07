@@ -2,8 +2,9 @@ from pathlib import Path
 import sys
 
 
-def work(cmp_file_path):
-    cmp_file_path = Path(cmp_file_path).resolve()
+def work(cmp_folder_path):
+    cmp_folder_path = Path(cmp_folder_path).resolve()
+    cmp_file_path = cmp_folder_path / f"{cmp_folder_path.stem}.cmp"
     test_vector_path = cmp_file_path.parent / f"{cmp_file_path.stem}.testvector.txt"
 
     content = []
@@ -24,12 +25,28 @@ def work(cmp_file_path):
                 v if v != 'in' else 'i'
                 for v in values
             ]
-            content.append(' '.join(values))
+            content.append(values)
+
+    content = fix_n_bit(content)
 
     with open(test_vector_path, 'w') as fd:
         for row in content:
-            fd.write(row)
+            fd.write(' '.join(row))
             fd.write('\n')
+
+
+def fix_n_bit(content):
+    headers = content[0]
+    column_number_of_bits = [
+        len(c)
+        for c in content[1]
+    ]
+    headers = [
+        h if nbits == 1 else f"{h}[{nbits}]"
+        for nbits, h in zip(column_number_of_bits, headers)
+    ]
+    content[0] = headers
+    return content
 
 
 if __name__ == '__main__':
