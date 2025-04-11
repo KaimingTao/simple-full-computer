@@ -1,2 +1,10 @@
-- why the folders are not organized as the original book
-    - the folders are organized by my way of understanding.
+# Elements of Computer Systems
+
+- Nand to Tetris
+
+
+## Run the hardware simulator
+
+```sh
+bash HardwareSimulator.sh
+```

@@ -4,7 +4,14 @@ import sys
 
 def work(cmp_folder_path):
     cmp_folder_path = Path(cmp_folder_path).resolve()
-    cmp_file_path = cmp_folder_path / f"{cmp_folder_path.stem}.cmp"
+
+    for f in cmp_folder_path.iterdir():
+        if f.suffix == '.cmp':
+            convert(f)
+
+
+def convert(cmp_file_path):
+
     test_vector_path = cmp_file_path.parent / f"{cmp_file_path.stem}.testvector.txt"
 
     content = []
