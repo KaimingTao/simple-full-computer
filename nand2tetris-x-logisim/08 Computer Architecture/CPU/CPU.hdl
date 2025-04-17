@@ -1,0 +1,113 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/CPU.hdl
+
+/**
+ * The Hack CPU (Central Processing unit), consisting of an ALU,
+ * two registers named A and D, and a program counter named PC.
+ * The CPU is designed to fetch and execute instructions written in
+ * the Hack machine language. In particular, functions as follows:
+ * Executes the inputted instruction according to the Hack machine
+ * language specification. The D and A in the language specification
+ * refer to CPU-resident registers, while M refers to the external
+ * memory location addressed by A, i.e. to Memory[A]. The inM input
+ * holds the value of this location. If the current instruction needs
+ * to write a value to M, the value is placed in outM, the address
+ * of the target location is placed in the addressM output, and the
+ * writeM control bit is asserted. (When writeM==0, any value may
+ * appear in outM). The outM and writeM outputs are combinational:
+ * they are affected instantaneously by the execution of the current
+ * instruction. The addressM and pc outputs are clocked: although they
+ * are affected by the execution of the current instruction, they commit
+ * to their new values only in the next time step. If reset==1 then the
+ * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather
+ * than to the address resulting from executing the current instruction.
+ */
+
+CHIP CPU {
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset==1) or continue executing
+                         // the current program (reset==0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write to M?
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+    PARTS:
+
+    // A or C instruction
+
+    And(a=true, b=instruction[15], out=CInstruction);
+    Not(in=CInstruction, out=AInstruction);
+
+    // C Instruction decode
+    And(a=CInstruction, b=instruction[12], out=compM);
+
+    // ALU Control
+    And(a=CInstruction, b=instruction[11], out=zx);
+    And(a=CInstruction, b=instruction[10], out=nx);
+    And(a=CInstruction, b=instruction[9], out=zy);
+    And(a=CInstruction, b=instruction[8], out=ny);
+    And(a=CInstruction, b=instruction[7], out=f);
+    And(a=CInstruction, b=instruction[6], out=no);
+
+    // Destination
+    And(a=CInstruction, b=instruction[5], out=destA);
+    And(a=CInstruction, b=instruction[4], out=destD);
+    And(a=CInstruction, b=instruction[3], out=destM);
+
+    // JMP
+    And(a=CInstruction, b=instruction[2], out=jlt);
+    And(a=CInstruction, b=instruction[1], out=jeq);
+    And(a=CInstruction, b=instruction[0], out=jgt);
+
+    // ALU
+    Mux16(a=A, b=inM, sel=compM, out=OPy);
+
+    And16(a=D, b=true, out=OPx);
+    ALU(
+        x=OPx, y=OPy,
+        zx=zx, nx=nx, zy=zy, ny=ny,
+        f=f,
+        no=no,
+        out=ALUout,
+        zr=zr, ng=ng);
+
+    // zero or negative or positive
+    Or(a=zr, b=ng, out=zrng);
+    Not(in=zrng, out=ps);
+
+    // D-register
+    DRegister(in=ALUout, load=destD, out=D);
+
+    // A-register
+
+    Or(a=AInstruction, b=destA, out=ALoad);
+    And16(a=true, b=instruction, out=constant);
+    Mux16(a=ALUout, b=constant, sel=AInstruction, out=Ain);
+    Register(in=Ain, load=ALoad, out=A);
+
+    // Memory
+    And16(a=true, b=A, out[0..14]=addressM);
+
+    And(a=true, b=destM, out=writeM);
+    Mux16(b=ALUout, sel=destM, out=outM);
+
+    // PC: JMP
+    And(a=zr, b=jeq, out=zrLoad);
+    And(a=ng, b=jlt, out=ngLoad);
+    And(a=ps, b=jgt, out=psLoad);
+
+    Or(a=zrLoad, b=ngLoad, out=pcLoad1);
+    Or(a=pcLoad1, b=psLoad, out=pcLoad);
+    Not(in=pcLoad, out=pcNoLoad);
+
+    Or(a=AInstruction, b=pcNoLoad, out=pcInc);
+
+    PC(in=A, load=pcLoad, inc=pcInc, reset=reset, out[0..14]=pc);
+}
