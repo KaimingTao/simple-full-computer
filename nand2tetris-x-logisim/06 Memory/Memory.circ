@@ -175,24 +175,26 @@
       <a name="radix" val="16"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(140,220)" name="Clock"/>
     <comp lib="0" loc="(200,430)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="label" val="address"/>
       <a name="width" val="3"/>
     </comp>
-    <comp lib="0" loc="(890,20)" name="Constant">
-      <a name="value" val="0xaa55"/>
+    <comp lib="0" loc="(80,190)" name="Clock"/>
+    <comp lib="0" loc="(890,20)" name="NoConnect">
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(890,420)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="label" val="read"/>
     </comp>
+    <comp lib="0" loc="(90,220)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="clk"/>
+    </comp>
     <comp lib="0" loc="(90,290)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="label" val="write"/>
-      <a name="radix" val="16"/>
     </comp>
     <comp lib="0" loc="(980,30)" name="Pin">
       <a name="appearance" val="NewPins"/>
@@ -246,7 +248,6 @@
     <wire from="(120,30)" to="(200,30)"/>
     <wire from="(120,330)" to="(120,380)"/>
     <wire from="(120,380)" to="(200,380)"/>
-    <wire from="(140,220)" to="(200,220)"/>
     <wire from="(140,250)" to="(190,250)"/>
     <wire from="(140,260)" to="(270,260)"/>
     <wire from="(140,270)" to="(350,270)"/>
@@ -324,6 +325,7 @@
     <wire from="(880,80)" to="(910,80)"/>
     <wire from="(890,20)" to="(930,20)"/>
     <wire from="(890,420)" to="(940,420)"/>
+    <wire from="(90,220)" to="(200,220)"/>
     <wire from="(90,290)" to="(100,290)"/>
     <wire from="(910,40)" to="(910,80)"/>
     <wire from="(910,40)" to="(930,40)"/>
