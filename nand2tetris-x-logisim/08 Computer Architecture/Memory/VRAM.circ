@@ -1462,4 +1462,133 @@
     <wire from="(990,690)" to="(1000,690)"/>
     <wire from="(990,690)" to="(990,720)"/>
   </circuit>
+  <circuit name="VRAM_driver_test">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="VRAM_driver_test"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="2048000.0"/>
+    <comp lib="0" loc="(1000,590)" name="Splitter">
+      <a name="bit1" val="0"/>
+      <a name="bit10" val="1"/>
+      <a name="bit11" val="1"/>
+      <a name="bit12" val="1"/>
+      <a name="bit13" val="1"/>
+      <a name="bit14" val="1"/>
+      <a name="bit15" val="1"/>
+      <a name="bit2" val="0"/>
+      <a name="bit3" val="0"/>
+      <a name="bit4" val="0"/>
+      <a name="bit5" val="0"/>
+      <a name="bit6" val="0"/>
+      <a name="bit7" val="0"/>
+      <a name="bit8" val="1"/>
+      <a name="bit9" val="1"/>
+      <a name="incoming" val="16"/>
+    </comp>
+    <comp lib="0" loc="(350,520)" name="Clock"/>
+    <comp lib="0" loc="(630,670)" name="Splitter">
+      <a name="appear" val="right"/>
+      <a name="bit10" val="1"/>
+      <a name="bit11" val="1"/>
+      <a name="bit12" val="1"/>
+      <a name="bit13" val="1"/>
+      <a name="bit14" val="1"/>
+      <a name="bit15" val="1"/>
+      <a name="bit16" val="1"/>
+      <a name="bit2" val="1"/>
+      <a name="bit3" val="1"/>
+      <a name="bit4" val="1"/>
+      <a name="bit5" val="1"/>
+      <a name="bit6" val="1"/>
+      <a name="bit7" val="1"/>
+      <a name="bit8" val="1"/>
+      <a name="bit9" val="1"/>
+      <a name="incoming" val="17"/>
+    </comp>
+    <comp lib="0" loc="(730,460)" name="Constant"/>
+    <comp lib="0" loc="(740,590)" name="Splitter">
+      <a name="bit1" val="0"/>
+      <a name="bit10" val="1"/>
+      <a name="bit11" val="1"/>
+      <a name="bit12" val="1"/>
+      <a name="bit13" val="1"/>
+      <a name="bit14" val="1"/>
+      <a name="bit15" val="1"/>
+      <a name="bit2" val="0"/>
+      <a name="bit3" val="0"/>
+      <a name="bit4" val="0"/>
+      <a name="bit5" val="0"/>
+      <a name="bit6" val="0"/>
+      <a name="bit7" val="0"/>
+      <a name="bit8" val="1"/>
+      <a name="bit9" val="1"/>
+      <a name="incoming" val="16"/>
+    </comp>
+    <comp lib="0" loc="(850,560)" name="Constant"/>
+    <comp lib="0" loc="(930,700)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="width" val="4"/>
+    </comp>
+    <comp lib="2" loc="(690,630)" name="Demultiplexer">
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="4" loc="(390,420)" name="Counter">
+      <a name="appearance" val="logisim_evolution"/>
+      <a name="max" val="0x1ffff"/>
+      <a name="width" val="17"/>
+    </comp>
+    <comp lib="5" loc="(1000,530)" name="RGB Video">
+      <a name="color" val="Grayscale (4 bit)"/>
+      <a name="cursor" val="No Cursor"/>
+      <a name="height" val="256"/>
+      <a name="scale" val="1"/>
+      <a name="width" val="256"/>
+    </comp>
+    <comp lib="5" loc="(730,530)" name="RGB Video">
+      <a name="color" val="Grayscale (4 bit)"/>
+      <a name="cursor" val="No Cursor"/>
+      <a name="height" val="256"/>
+      <a name="scale" val="1"/>
+      <a name="width" val="256"/>
+    </comp>
+    <wire from="(1010,530)" to="(1010,540)"/>
+    <wire from="(1020,530)" to="(1020,560)"/>
+    <wire from="(1020,570)" to="(1040,570)"/>
+    <wire from="(1020,580)" to="(1050,580)"/>
+    <wire from="(1040,530)" to="(1040,570)"/>
+    <wire from="(1050,530)" to="(1050,580)"/>
+    <wire from="(1060,530)" to="(1060,550)"/>
+    <wire from="(1060,550)" to="(1060,700)"/>
+    <wire from="(350,520)" to="(370,520)"/>
+    <wire from="(370,390)" to="(370,500)"/>
+    <wire from="(370,390)" to="(670,390)"/>
+    <wire from="(370,500)" to="(370,520)"/>
+    <wire from="(370,500)" to="(390,500)"/>
+    <wire from="(590,530)" to="(630,530)"/>
+    <wire from="(630,530)" to="(630,670)"/>
+    <wire from="(650,680)" to="(710,680)"/>
+    <wire from="(650,690)" to="(660,690)"/>
+    <wire from="(660,630)" to="(660,690)"/>
+    <wire from="(660,630)" to="(690,630)"/>
+    <wire from="(670,390)" to="(670,540)"/>
+    <wire from="(670,540)" to="(740,540)"/>
+    <wire from="(710,650)" to="(710,680)"/>
+    <wire from="(720,620)" to="(740,620)"/>
+    <wire from="(720,640)" to="(980,640)"/>
+    <wire from="(740,530)" to="(740,540)"/>
+    <wire from="(740,540)" to="(1010,540)"/>
+    <wire from="(740,590)" to="(740,620)"/>
+    <wire from="(750,530)" to="(750,560)"/>
+    <wire from="(750,560)" to="(850,560)"/>
+    <wire from="(760,570)" to="(770,570)"/>
+    <wire from="(760,580)" to="(780,580)"/>
+    <wire from="(770,530)" to="(770,570)"/>
+    <wire from="(780,530)" to="(780,580)"/>
+    <wire from="(790,530)" to="(790,550)"/>
+    <wire from="(790,550)" to="(1060,550)"/>
+    <wire from="(850,560)" to="(1020,560)"/>
+    <wire from="(930,700)" to="(1060,700)"/>
+    <wire from="(980,590)" to="(1000,590)"/>
+    <wire from="(980,590)" to="(980,640)"/>
+  </circuit>
 </project>
