@@ -35,6 +35,7 @@ def convert(cmp_file_path):
             content.append(values)
 
     content = fix_n_bit(content)
+    # content = remove_timer(content)
 
     with open(test_vector_path, 'w') as fd:
         for row in content:
@@ -53,6 +54,16 @@ def fix_n_bit(content):
         for nbits, h in zip(column_number_of_bits, headers)
     ]
     content[0] = headers
+    return content
+
+
+def remove_timer(content):
+    headers = content[0]
+    if headers[0].startswith('time'):
+        content = [
+            i[1:]
+            for i in content
+        ]
     return content
 
 

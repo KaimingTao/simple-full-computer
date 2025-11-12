@@ -88,3 +88,19 @@ def add(n1: str, n2: str) -> str:
         return carry + ''.join(d0[::-1])
     else:
         return ''.join(d0[::-1])
+
+# class RotatingList(list):
+#     def __init__(self, *args):
+#         super().__init__(args)
+#         self._index = 0
+
+#     def __iter__(self):
+#         return self
+
+#     def __next__(self):
+#         if not self:
+#             raise StopIteration
+
+#         item = self[self._index]
+#         self._index = (self._index + 1) % len(self)
+#         return item
